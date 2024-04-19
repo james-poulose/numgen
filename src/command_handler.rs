@@ -1,11 +1,11 @@
-use crate::cli::cli::Cli;
-use crate::cli::commands_type::CommandType;
-use crate::executors::calculate;
-pub fn handle_command(cli: Cli) {
+use crate::{
+    cli::{cli_parser::CliParser, commands_type::CommandType},
+    handlers::fibonacci::generate_fibonacci_series,
+};
+pub fn handle_command(cli: CliParser) {
     match &cli.command {
-        CommandType::Fibonacci(_args) => {
-            println!("handling...");
-            calculate();
+        CommandType::Fibonacci(args) => {
+            generate_fibonacci_series(args);
         }
     }
 }

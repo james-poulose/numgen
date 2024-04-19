@@ -1,7 +1,7 @@
 use std::fmt;
 
 #[derive(clap::ValueEnum, Clone, Debug)]
-pub enum OutputLevel {
+pub enum LogLevel {
     All,
     Default,
     Info,
@@ -10,7 +10,7 @@ pub enum OutputLevel {
     Debug,
 }
 
-impl fmt::Display for OutputLevel {
+impl fmt::Display for LogLevel {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self)
     }
