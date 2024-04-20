@@ -20,15 +20,19 @@ pub struct FibonacciArgs {
     )]
     pub count: Option<u32>,
 
-    #[arg(short = 'l', long = "log", value_name = "LOG_FILE_PATH")]
+    #[arg(
+        short = 'l',
+        long = "log",
+        value_name = "LOG_FILE_PATH",
+        help = "File name to log the output to."
+    )]
     pub log: Option<String>,
-    /*
+
     #[arg(
         short = 'v',
         long = "verbosity",
-        default_value_t = LogLevel::Default,
+        default_value = Some("Info"),
         help = "Verbosity level for logging."
     )]
-    pub verbosity: LogLevel,
-    */
+    pub verbosity: Option<String>,
 }

@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use log::LevelFilter;
 use log4rs::{
     append::{
@@ -17,7 +19,7 @@ pub fn init_log(args: Vec<String>) {
     // User may/may not supply a file path. All file related configuration need to be made conditional.
     let mut file_path: String = String::new();
     let mut file_logging_enabled = false;
-    let file_path_result = get_log_path(args);
+    let file_path_result = get_log_path_from_args(&args);
     match file_path_result {
         Ok(path) => {
             file_logging_enabled = true;
@@ -26,7 +28,7 @@ pub fn init_log(args: Vec<String>) {
         _ => { /* Ignoring other cases. We care only if there is a valid file path. */ }
     }
 
-    let level = LevelFilter::Info;
+    let level = get_verbosity_level_from_args(&args);
 
     // Build a stderr logger.
     let console_builder = ConsoleAppender::builder()
@@ -72,9 +74,9 @@ pub fn init_log(args: Vec<String>) {
     let _handle = log4rs::init_config(config);
 }
 
-fn get_log_path(args: Vec<String>) -> Result<String, bool> {
+fn get_log_path_from_args(args: &Vec<String>) -> Result<String, bool> {
     // We do not have clap yet. Even if we have clap, we have to go through all commands in the 'match' and get the "-l" from its args.
-    // There is now way in clap just to see if "-l" is present or not. So we are resorting to the basic way of reading CLI args.
+    // There is no way in clap just to see if "-l" is present or not. So we are resorting to the basic way of reading CLI args.
     for i in 0..args.len() {
         if (args[i] == "-l" || args[i] == "--log") && i + 1 < args.len() {
             let maybe_path = args[i + 1].clone();
@@ -82,4 +84,30 @@ fn get_log_path(args: Vec<String>) -> Result<String, bool> {
         }
     }
     return Err(false);
+}
+
+fn get_verbosity_level_from_args(args: &Vec<String>) -> LevelFilter {
+    // We do not have clap yet. Even if we have clap, we have to go through all commands in the 'match' and get the options from its args.
+    // There is no way in clap just to see if a particular option is present or not. So we are resorting to the basic way of reading CLI args.
+    for i in 0..args.len() {
+        if (args[i] == "-v" || args[i] == "--verbosity") && i + 1 < args.len() {
+            let maybe_level_filter_str = args[i + 1].clone();
+
+            let level_filter_parse_result = LevelFilter::from_str(&maybe_level_filter_str);
+            match level_filter_parse_result {
+                Ok(filter) => {
+                    return filter;
+                }
+                _ => {
+                    println!("Invalid LevelFilter");
+                }
+            }
+
+            // No need to continue the loop, exit fast.
+            return LevelFilter::Info;
+        }
+    }
+
+    // If none supplied, use this as the default.
+    return LevelFilter::Info;
 }
