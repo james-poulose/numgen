@@ -1,13 +1,11 @@
+
 use log::{debug, info, warn};
 
-use crate::cli::fibonacci_args::FibonacciArgs;
-
-pub fn generate_fibonacci_series(args: &FibonacciArgs) {
-    let start = args.start;
+pub fn generate_fibonacci_series(start: u64, count: Option<u32>) {
     const COUNT_DEFAULT: u32 = 10;
 
     // 10 will be set as default, if not provided..
-    let mut count = args.count.unwrap_or(0);
+    let mut count = count.unwrap_or(0);
     if count <= 0 {
         warn!(
             "No valid value found for argument 'count', defaulting to {}.",

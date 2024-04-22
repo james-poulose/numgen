@@ -1,13 +1,5 @@
-[package]
-name = "numgen"
-version = "0.1.0"
-edition = "2021"
-authors = ["James Poulose"]
+[workspace]
 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-clap = { version = "4.5.4", features = ["derive", "cargo"] }
-log = { version = "0.4.21", features = ["std"] }
-log4rs = "1.3.0"
+members = [
+    "numgen_cli", "numgen_lib",
+]

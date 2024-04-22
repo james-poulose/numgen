@@ -17,5 +17,5 @@
         ".\\Cargo.toml"
     ],
     "rust-analyzer.showUnlinkedFileNotification": false,
-    "cSpell.words": ["appender"]
+    "cSpell.words": ["appender", "numgen"]
 }

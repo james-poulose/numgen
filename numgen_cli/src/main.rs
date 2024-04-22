@@ -1,7 +1,6 @@
 mod cli;
 mod command_handler;
 mod common;
-mod handlers;
 use std::{env::args, time::Instant};
 
 use clap::Parser;
