@@ -1,6 +1,5 @@
+use super::common_args::CommonArgs;
 use clap::Args;
-
-//use super::log_level::LogLevel;
 
 #[derive(Args)]
 pub struct FibonacciArgs {
@@ -20,19 +19,7 @@ pub struct FibonacciArgs {
     )]
     pub count: Option<u32>,
 
-    #[arg(
-        short = 'l',
-        long = "log",
-        value_name = "LOG_FILE_PATH",
-        help = "File name to log the output to."
-    )]
-    pub log: Option<String>,
-
-    #[arg(
-        short = 'v',
-        long = "verbosity",
-        default_value = Some("Info"),
-        help = "Verbosity level for logging."
-    )]
-    pub verbosity: Option<String>,
+    // CommonArgs contains properties that are common to multiple structs.
+    #[command(flatten)]
+    pub common: CommonArgs,
 }
