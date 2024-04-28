@@ -1,7 +1,6 @@
+use log::{debug, warn};
 
-use log::{debug, info, warn};
-
-pub fn generate_fibonacci_series(start: u64, count: Option<u32>) {
+pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<u64> {
     const COUNT_DEFAULT: u32 = 10;
 
     // 10 will be set as default, if not provided..
@@ -16,13 +15,7 @@ pub fn generate_fibonacci_series(start: u64, count: Option<u32>) {
 
     let series = get_series_vec(start, count);
 
-    // Convert the vector to a comma separated string.
-    let mut series_str = series
-        .iter()
-        .map(|x| x.to_string() + ",")
-        .collect::<String>();
-    series_str = series_str.trim_end_matches(",").to_string();
-    info!("Fibonacci series for the given input: {}", series_str);
+    return series;
 }
 
 fn get_series_vec(start: u64, count: u32) -> Vec<u64> {
