@@ -1,7 +1,9 @@
+use core::str;
+
 use log::{debug, warn};
 use num_bigint::BigUint;
 
-pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<u64> {
+pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<String> {
     const COUNT_DEFAULT: u32 = 10;
 
     // 10 will be set as default, if not provided..
@@ -14,9 +16,16 @@ pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<u64> {
         count = COUNT_DEFAULT;
     }
 
-    let series = get_series_vec(start, count);
+    let series = get_series_vec_x(start, count);
 
-    return series;
+    // Convert BigUint to String.
+    let mut series_str: Vec<String> = vec![];
+
+    for x in series.iter() {
+        series_str.push(x.to_string());
+    }
+
+    return series_str;
 }
 
 fn get_series_vec(start: u64, count: u32) -> Vec<u64> {
