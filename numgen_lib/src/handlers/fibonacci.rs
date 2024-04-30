@@ -50,34 +50,38 @@ fn get_series_vec(start: u64, count: u32) -> Vec<u64> {
     return series;
 }
 
-// fn get_series_vec_x(start: u64, count: u32) -> Vec<BigUint> {
-//     let mut series: Vec<BigUint>;
-//     debug!("count: {}", count);
-//     // You will either get a 0 as the start number (because Fibonacci series always starts with a zero), or a Fibonacci
-//     // number (if you are starting from a random number supplied by --start).
-//     let mut last: BigUint = get_start_num_x(BigUint::from(start));
-//     debug!("last: {}", last);
+fn get_series_vec_x(start: u64, count: u32) -> Vec<BigUint> {
+    let big_zero = BigUint::from(0u8);
+    let big_one = BigUint::from(1u8);
+    let mut series: Vec<BigUint>;
 
-//     // Calculate the second number in the series (whether starting from 0 or not).
-//     let mut current: BigUint = get_next_fibonacci_x(last);
-//     debug!("current: {}", current);
+    debug!("count: {}", count);
+    // You will either get a 0 as the start number (because Fibonacci series always starts with a zero), or a Fibonacci
+    // number (if you are starting from a random number supplied by --start).
+    let mut last: BigUint = get_start_num_x(&BigUint::from(start));
+    debug!("last: {}", last);
 
-//     // Initialize the result array with the start values depending where it starts from.
-//     if last == BIG_ZERO {
-//         series = vec![BIG_ZERO, BIG_ONE];
-//     } else {
-//         series = vec![last.clone(), current.clone()];
-//     }
+    // Calculate the second number in the series (whether starting from 0 or not).
+    let mut current: BigUint = get_next_fibonacci_x(&last);
+    debug!("current: {}", current);
 
-//     for _ in 1..count - 1 {
-//         let next = (&last + &current);
-//         series.push(next.clone());
-//         last = current;
-//         current = next;
-//     }
+    // Initialize the result array with the start values depending where it starts from.
 
-//     return series;
-// }
+    if last == big_zero {
+        series = vec![big_zero, big_one];
+    } else {
+        series = vec![last.clone(), current.clone()];
+    }
+
+    for _ in 1..count - 1 {
+        let next = (&last + &current);
+        series.push(next.clone());
+        last = current;
+        current = next;
+    }
+
+    return series;
+}
 
 fn get_start_num(start: u64) -> u64 {
     if start <= 0 {
@@ -89,9 +93,9 @@ fn get_start_num(start: u64) -> u64 {
     return next;
 }
 
-fn get_start_num_x(start: BigUint) -> BigUint {
+fn get_start_num_x(start: &BigUint) -> BigUint {
     let big_zero = BigUint::from(0u8);
-    if start <= big_zero {
+    if start <= &big_zero {
         return big_zero;
     };
 
@@ -114,17 +118,18 @@ fn get_next_fibonacci(mut number: u64) -> u64 {
     }
 }
 
-fn get_next_fibonacci_x(mut number: BigUint) -> BigUint {
+fn get_next_fibonacci_x(number: &BigUint) -> BigUint {
     // Start an infinite loop until we find the next fibonacci.
     // TODO: Risk analysis - Extreme large numbers, O(n).
+    let mut num = number.clone();
     loop {
         // We don't care if the current number is a fibonacci. We want to find the next fibonacci in the number line.
-        number = number + BigUint::from(1u8);
+        num = num + BigUint::from(1u8);
 
         let is_fibonacci = is_fibonacci_x(&number);
 
         if is_fibonacci {
-            return number;
+            return num;
         }
     }
 }
