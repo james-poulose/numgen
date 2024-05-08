@@ -1,6 +1,6 @@
 use core::str;
 
-use log::{debug, warn};
+use log::{debug, info, warn};
 use num_bigint::BigUint;
 
 pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<String> {
@@ -28,12 +28,12 @@ pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<String> 
     return series_str;
 }
 
-fn get_series_vec(start: u64, count: u32) -> Vec<u64> {
+fn _get_series_vec(start: u64, count: u32) -> Vec<u64> {
     let mut series;
 
     // You will either get a 0 as the start number (because Fibonacci series always starts with a zero), or a Fibonacci
     // number (if you are starting from a random number supplied by --start).
-    let mut last = get_start_num(start);
+    let mut last = _get_start_num(start);
 
     // Calculate the second number in the series (whether starting from 0 or not).
     let mut current = get_next_fibonacci(last);
@@ -92,7 +92,7 @@ fn get_series_vec_x(start: u64, count: u32) -> Vec<BigUint> {
     return series;
 }
 
-fn get_start_num(start: u64) -> u64 {
+fn _get_start_num(start: u64) -> u64 {
     if start <= 0 {
         return 0;
     };
@@ -135,7 +135,7 @@ fn get_next_fibonacci_x(number: &BigUint) -> BigUint {
         // We don't care if the current number is a fibonacci. We want to find the next fibonacci in the number line.
         num = num + BigUint::from(1u8);
 
-        let is_fibonacci = is_fibonacci_x(&number);
+        let is_fibonacci = is_fibonacci_x(&num);
 
         if is_fibonacci {
             return num;
@@ -156,7 +156,10 @@ fn is_fibonacci_x(number: &BigUint) -> bool {
     //  If we take any number x, it will be a Fibonacci number if and only if (5x^2)+4 or (5x^2)-4 is a perfect square.
     // https://www.baeldung.com/kotlin/fibonacci-number-test#using-perfect-square-property
     let part1 = BigUint::from(5u8) * number * number;
+    info!("number: {}", &number);
+    info!("part1: {}", &part1);
     let four_bi: BigUint = BigUint::from(4u8); // 4.to_biguint().unwrap();
+    info!("four_bi: {}", &four_bi);
     let maybe_perfect_sq_1 = &part1 + &four_bi;
     let maybe_perfect_sq_2 = &part1 - &four_bi;
     let result =
@@ -180,13 +183,13 @@ fn is_perfect_square_x(number: &BigUint) -> bool {
 
 #[test]
 fn test_basic() {
-    let mut series = get_series_vec(0, 5);
+    let mut series = _get_series_vec(0, 5);
     assert_eq!([0, 1, 1, 2, 3], &series[..]);
 
-    series = get_series_vec(6, 3);
+    series = _get_series_vec(6, 3);
     assert_eq!([8, 13, 21], &series[..]);
 
-    series = get_series_vec(6760, 3);
+    series = _get_series_vec(6760, 3);
     assert_eq!([6765, 10946, 17711], &series[..]);
 }
 
