@@ -1,5 +1,4 @@
 [workspace]
+resolver = "2"
 
-members = [
-    "numgen_cli", "numgen_lib",
-]
+members = ["numgen_cli", "numgen_lib"]
