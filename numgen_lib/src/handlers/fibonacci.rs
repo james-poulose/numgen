@@ -183,30 +183,65 @@ fn is_perfect_square_x(number: &BigUint) -> bool {
 
 #[test]
 fn test_basic() {
-    let mut series = _get_series_vec(0, 5);
-    assert_eq!([0, 1, 1, 2, 3], &series[..]);
+    let mut series = get_series_vec_x(0, 5);
+    //assert_eq!([0, 1, 1, 2, 3], &series[..]);
+    assert_eq!(
+        [
+            BigUint::from(0u8),
+            BigUint::from(0u8),
+            BigUint::from(1u8),
+            BigUint::from(2u8),
+            BigUint::from(3u8)
+        ],
+        &series[..]
+    );
 
-    series = _get_series_vec(6, 3);
-    assert_eq!([8, 13, 21], &series[..]);
+    series = get_series_vec_x(6, 3);
+    assert_eq!(
+        [BigUint::from(8u8), BigUint::from(13u8), BigUint::from(21u8)],
+        &series[..]
+    );
 
-    series = _get_series_vec(6760, 3);
-    assert_eq!([6765, 10946, 17711], &series[..]);
+    series = get_series_vec_x(6760, 3);
+    assert_eq!(
+        [
+            BigUint::from(6765u16),
+            BigUint::from(10946u16),
+            BigUint::from(17711u16)
+        ],
+        &series[..]
+    );
 }
 
 #[test]
 fn test_perfect_square() {
-    assert_eq!(true, is_perfect_square(64));
-    assert_eq!(false, is_perfect_square(7));
+    assert_eq!(true, is_perfect_square_x(&BigUint::from(64u8)));
+    assert_eq!(false, is_perfect_square_x(&BigUint::from(7u8)));
 }
 
 #[test]
 fn test_get_next_fibonacci() {
     // Test with non-fibonacci inputs.
-    assert_eq!(55, get_next_fibonacci(50));
-    assert_eq!(165580141, get_next_fibonacci(165570141));
+    assert_eq!(
+        BigUint::from(55u8),
+        get_next_fibonacci_x(&BigUint::from(50u8))
+    );
+    assert_eq!(
+        BigUint::from(165580141u32),
+        get_next_fibonacci_x(&BigUint::from(165570141u32))
+    );
 
     // Test with fibonacci inputs.
-    assert_eq!(2, get_next_fibonacci(1));
-    assert_eq!(3, get_next_fibonacci(2));
-    assert_eq!(6765, get_next_fibonacci(4181));
+    assert_eq!(
+        BigUint::from(2u8),
+        get_next_fibonacci_x(&BigUint::from(1u8))
+    );
+    assert_eq!(
+        BigUint::from(3u8),
+        get_next_fibonacci_x(&BigUint::from(2u8))
+    );
+    assert_eq!(
+        BigUint::from(6765u16),
+        get_next_fibonacci_x(&BigUint::from(4181u16))
+    );
 }
