@@ -42,7 +42,6 @@ fn get_fib_series_vec(start: u64, count: u32) -> Vec<BigUint> {
     debug!("current: {}", current);
 
     // Initialize the result array with the start values depending where it starts from.
-
     if last == big_zero {
         series = vec![big_zero, big_one];
     } else {
