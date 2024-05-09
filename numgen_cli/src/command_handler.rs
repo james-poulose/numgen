@@ -15,5 +15,9 @@ pub fn handle_command(cli: CliParser) {
             series_str = series_str.trim_end_matches(",").to_string();
             info!("Fibonacci series for the given input: {}", series_str);
         }
+        CommandType::Factorial(args) => {
+            let factorial = numgen_lib::compute_factorial(args.number);
+            info!("Factorial of {}: {}", args.number, factorial);
+        }
     }
 }
