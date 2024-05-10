@@ -1,17 +1,16 @@
 use clap::Subcommand;
 
-use super::factorial_args::FactorialArgs;
-use super::fibonacci_args::FibonacciArgs;
-use super::tribonacci_args::TribonacciArgs;
-
 #[derive(Subcommand)]
 pub enum CommandType {
     /// Generates Fibonacci series.
-    Fibonacci(FibonacciArgs),
+    Fibonacci(super::fibonacci_args::FibonacciArgs),
 
     /// Computes the Factorial of a given number.
-    Factorial(FactorialArgs),
+    Factorial(super::factorial_args::FactorialArgs),
 
     /// Generates Tribonacci series.
-    Tribonacci(TribonacciArgs),
+    Tribonacci(super::tribonacci_args::TribonacciArgs),
+
+    /// Generates the Prime numbers
+    Prime(super::prime_args::PrimeArgs),
 }

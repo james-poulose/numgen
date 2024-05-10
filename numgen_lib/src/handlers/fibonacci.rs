@@ -1,6 +1,8 @@
 use log::{debug, info, warn};
 use num_bigint::BigUint;
 
+use crate::handlers::utils;
+
 pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<String> {
     const COUNT_DEFAULT: u32 = 10;
 
@@ -17,11 +19,7 @@ pub fn generate_fibonacci_series(start: u64, count: Option<u32>) -> Vec<String> 
     let series = get_fib_series_vec(start, count);
 
     // Convert BigUint to String.
-    let mut series_str: Vec<String> = vec![];
-
-    for x in series.iter() {
-        series_str.push(x.to_string());
-    }
+    let series_str = utils::big_uint_to_string_vec(series);
 
     return series_str;
 }

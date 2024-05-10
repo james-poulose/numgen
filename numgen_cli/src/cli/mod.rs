@@ -4,4 +4,5 @@ pub mod common_args;
 pub mod factorial_args;
 pub mod fibonacci_args;
 pub mod log_level;
+pub mod prime_args;
 pub mod tribonacci_args;

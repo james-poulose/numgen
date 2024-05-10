@@ -7,7 +7,7 @@ use clap::Parser;
 use cli::cli_parser::CliParser;
 use log::info;
 
-use crate::common::log_util::init_log;
+use crate::common::log_util;
 
 fn main() {
     let args = args().skip(1).collect::<Vec<_>>();
@@ -17,7 +17,7 @@ fn main() {
 
     // Initialize logging (console & file (if a valid path provided in the args)).
     // Variable cli needs to be borrowed here using '&' or else handle_command will not be able to use it.
-    init_log(args);
+    log_util::init_log(args);
 
     // Start benchmark.
     let start = Instant::now();

@@ -14,3 +14,6 @@ pub fn compute_factorial(number: i32) -> String {
 pub fn generate_tribonacci_series(count: u32) -> Vec<String> {
     return handlers::tribonacci::generate_tribonacci_series(count);
 }
+pub fn generate_prime_numbers(start: u32, count: Option<u32>) -> Vec<String> {
+    return handlers::prime::generate_prime_numbers(start, count);
+}

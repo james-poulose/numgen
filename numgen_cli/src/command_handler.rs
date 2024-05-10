@@ -20,6 +20,12 @@ pub fn handle_command(cli: CliParser) {
             let series_str = convert_to_csv(series);
             info!("Tribonacci series for the given input: {}", series_str);
         }
+        CommandType::Prime(args) => {
+            let series = numgen_lib::generate_prime_numbers(args.start, args.count);
+
+            let series_str = convert_to_csv(series);
+            info!("Prime numbers series for the given input: {}", series_str);
+        }
     }
 }
 
