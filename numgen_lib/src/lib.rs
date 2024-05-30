@@ -17,3 +17,7 @@ pub fn generate_tribonacci_series(count: u32) -> Vec<String> {
 pub fn generate_prime_numbers(start: u32, count: Option<u32>) -> Vec<String> {
     return handlers::prime::generate_prime_numbers(start, count);
 }
+
+pub fn generate_nnacci_series(dimension: i8, count: Option<u32>) -> Vec<String> {
+    return handlers::nnachi::generate_nnacci_series(dimension, count);
+}

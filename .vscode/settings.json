@@ -17,5 +17,5 @@
         ".\\Cargo.toml"
     ],
     "rust-analyzer.showUnlinkedFileNotification": false,
-    "cSpell.words": ["appender", "numgen", "tribonacci"]
+    "cSpell.words": ["appender", "nnacci", "nnachi", "numgen", "tribonacci"]
 }

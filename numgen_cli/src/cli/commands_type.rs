@@ -11,6 +11,9 @@ pub enum CommandType {
     /// Generates Tribonacci series.
     Tribonacci(super::tribonacci_args::TribonacciArgs),
 
+    /// Generates Nnacci series.
+    Nnacci(super::nnachi_args::NnacciArgs),
+
     /// Generates the Prime numbers
     Prime(super::prime_args::PrimeArgs),
 }

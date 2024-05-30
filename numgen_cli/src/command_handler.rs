@@ -26,6 +26,15 @@ pub fn handle_command(cli: CliParser) {
             let series_str = convert_to_csv(series);
             info!("Prime numbers series for the given input: {}", series_str);
         }
+        CommandType::Nnacci(args) => {
+            let series = numgen_lib::generate_nnacci_series(args.dimension, args.count);
+
+            let series_str = convert_to_csv(series);
+            info!(
+                "Nnacci series (dimension: {}) for the given input: {}",
+                args.dimension, series_str
+            );
+        }
     }
 }
 
